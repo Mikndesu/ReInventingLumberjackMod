@@ -1,4 +1,4 @@
-package com.github.mikndesu;
+package com.github.mikndesu.re_lumberjack;
 
 import net.fabricmc.api.ModInitializer;
 

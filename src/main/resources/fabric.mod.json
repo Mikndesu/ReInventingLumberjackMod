@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.mikn.re_lumberjack.ReLumberjack"
+      "com.github.mikndesu.re_lumberjack.ReLumberjack"
     ]
   },
   "mixins": [
