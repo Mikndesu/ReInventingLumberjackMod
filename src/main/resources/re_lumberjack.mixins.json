@@ -4,6 +4,7 @@
   "package": "com.github.mikndesu.re_lumberjack.asm.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockMixin"
   ],
   "client": [
   ],
