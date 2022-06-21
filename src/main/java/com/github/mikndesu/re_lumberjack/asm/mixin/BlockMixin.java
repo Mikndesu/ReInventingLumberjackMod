@@ -1,7 +1,9 @@
 package com.github.mikndesu.re_lumberjack.asm.mixin;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,6 +29,8 @@ public class BlockMixin {
     @Inject(method = "playerDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V", at = @At("RETURN"), cancellable = true)
     private void inject(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack is, CallbackInfo ci) {
         List<BlockState> acceptedBlocks = new ArrayList<>();
+        var block = Registry.BLOCK.get(new ResourceLocation("birch_log"));
+        acceptedBlocks.add(block.defaultBlockState());
         acceptedBlocks.add(Blocks.OAK_LOG.defaultBlockState());
         if(acceptedBlocks.stream().noneMatch(s->s.equals(blockState))) {
             return;
