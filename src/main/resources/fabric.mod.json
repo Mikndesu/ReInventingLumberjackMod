@@ -12,6 +12,9 @@
   "entrypoints": {
     "main": [
       "com.github.mikndesu.re_lumberjack.ReLumberjack"
+    ],
+    "modmenu": [
+      "com.github.mikndesu.re_lumberjack.ReLumberjack.client.screen.ModMenuIntegration"
     ]
   },
   "mixins": [
