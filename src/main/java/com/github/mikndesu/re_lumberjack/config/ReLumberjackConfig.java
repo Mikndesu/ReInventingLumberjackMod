@@ -13,5 +13,5 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class ReLumberjackConfig implements ConfigData {
     @RequiresRestart
     @Comment("Changes will be applied to your client after restarting.")
-    private List<String> registryNameList = new ArrayList<>();
+    public List<String> registryNameList = new ArrayList<>();
 }
