@@ -27,10 +27,10 @@ public class BlockMixin {
         if(ReLumberjack.acceptedBlocks.stream().noneMatch(s->s.equals(blockState))) {
             return;
         }
-        ItemStack itemStack = new ItemStack(blockState.getBlock().asItem());
         int drops = removeAndComputeLogDrops(0, blockState, blockPos, level);
-        for(int i = 0; i < drops; i++) {
-            Block.dropResources(blockState, level, blockPos, blockEntity, player, itemStack);
+        for(int i = 0; i < drops;) {
+            Block.dropResources(blockState, level, blockPos);
+            i++;
         }
     }
 
