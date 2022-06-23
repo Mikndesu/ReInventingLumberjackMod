@@ -11,6 +11,7 @@ import com.github.mikndesu.re_lumberjack.config.ReLumberjackConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.ResourceLocationException;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,8 +27,13 @@ public class ReLumberjack implements ModInitializer {
         AutoConfig.register(ReLumberjackConfig.class, JanksonConfigSerializer::new);
         var config = AutoConfig.getConfigHolder(ReLumberjackConfig.class).getConfig();
         for(var blockRegistryName:config.registryNameList) {
-            var block = Registry.BLOCK.get(new ResourceLocation(blockRegistryName));
-            acceptedBlocks.add(block.defaultBlockState());
+            try {
+                var resourceLocation = new ResourceLocation(blockRegistryName);
+                var block = Registry.BLOCK.get(resourceLocation);
+                acceptedBlocks.add(block.defaultBlockState());
+            } catch(ResourceLocationException e) {
+                continue;
+            }
         }
     }
     
