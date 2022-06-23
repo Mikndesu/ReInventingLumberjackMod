@@ -22,17 +22,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.github.mikndesu.re_lumberjack.ReLumberjack;
 import com.google.common.collect.ImmutableList;
 
 @Mixin(Block.class)
 public class BlockMixin {
     @Inject(method = "playerDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V", at = @At("RETURN"), cancellable = true)
     private void inject(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack is, CallbackInfo ci) {
-        List<BlockState> acceptedBlocks = new ArrayList<>();
-        var block = Registry.BLOCK.get(new ResourceLocation("birch_log"));
-        acceptedBlocks.add(block.defaultBlockState());
-        acceptedBlocks.add(Blocks.OAK_LOG.defaultBlockState());
-        if(acceptedBlocks.stream().noneMatch(s->s.equals(blockState))) {
+        if(ReLumberjack.acceptedBlocks.stream().noneMatch(s->s.equals(blockState))) {
             return;
         }
         ItemStack itemStack = new ItemStack(blockState.getBlock().asItem());
